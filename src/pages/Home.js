@@ -23,9 +23,33 @@ const Home = () => {
 
   return (
     <StyledGameList>
-      <h1>Upcoming Games</h1>
+      <h2>Upcoming Games</h2>
       <StyledGames>
         {upcomingGames.map((item) => (
+          <Game
+            name={item.name}
+            released={item.released}
+            id={item.id}
+            image={item.background_image}
+            key={item.id}
+          />
+        ))}
+      </StyledGames>
+      <h2>Popular Games</h2>
+      <StyledGames>
+        {popularGames.map((item) => (
+          <Game
+            name={item.name}
+            released={item.released}
+            id={item.id}
+            image={item.background_image}
+            key={item.id}
+          />
+        ))}
+      </StyledGames>
+      <h2>New Games</h2>
+      <StyledGames>
+        {newGames.map((item) => (
           <Game
             name={item.name}
             released={item.released}
