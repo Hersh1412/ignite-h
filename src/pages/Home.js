@@ -7,6 +7,7 @@ import { loadGames } from "../actions/gamesAction";
 import Game from "../components/Game";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import GameDetail from "../components/GameDetail";
 
 // Function
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
 
   return (
     <StyledGameList>
+      <GameDetail />
       <h2>Upcoming Games</h2>
       <StyledGames>
         {upcomingGames.map((item) => (
