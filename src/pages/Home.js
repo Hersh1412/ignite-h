@@ -1,6 +1,7 @@
 // Components
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 // Custom Components
 import { loadGames } from "../actions/gamesAction";
@@ -11,6 +12,9 @@ import GameDetail from "../components/GameDetail";
 
 // Function
 const Home = () => {
+  const location = useLocation();
+  const pathId = location.pathname.split("/")[2];
+
   // fetch data from api to redux store
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,7 +28,7 @@ const Home = () => {
 
   return (
     <StyledGameList>
-      <GameDetail />
+      {pathId && <GameDetail />}
       <h2>Upcoming Games</h2>
       <StyledGames>
         {upcomingGames.map((item) => (
