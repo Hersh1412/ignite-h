@@ -6,10 +6,16 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+
 // Custom Components
 
+import { smallImg } from "../util";
+import { unLoadDetail } from "../actions/detailAction";
+
 // Function
-const GameDetail = () => {
+const GameDetail = ({ pathId }) => {
+  const dispatch = useDispatch();
   const { screen, game, isLoading } = useSelector((state) => state.detail);
   const history = useHistory();
 
@@ -18,6 +24,8 @@ const GameDetail = () => {
     if (element.classList.contains("shadow")) {
       document.body.style.overflow = "auto";
       history.push("/");
+      //
+      //  dispatch(unLoadDetail());
     }
   };
 
@@ -25,10 +33,10 @@ const GameDetail = () => {
     <>
       {!isLoading && (
         <StyledCardShadow className="shadow" onClick={exitDetailHandler}>
-          <StyledDetail>
+          <StyledDetail layoutId={pathId}>
             <StyledStats>
               <div className="rating">
-                <h3>{game.name}</h3>
+                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
               </div>
               <StyledInfo>
@@ -41,14 +49,22 @@ const GameDetail = () => {
               </StyledInfo>
             </StyledStats>
             <StyledMedia>
-              <img src={game.background_image} alt={game.background_image} />
+              <motion.img
+                layoutId={`image ${pathId}`}
+                src={smallImg(game.background_image, 1280)}
+                alt={game.background_image}
+              />
             </StyledMedia>
             <StyledDesc>
               <p>{game.description_raw}</p>
             </StyledDesc>
             <div className="gallery">
               {screen.results.map((item) => (
-                <img src={item.image} alt={item.id} key={item.id} />
+                <img
+                  src={smallImg(item.image, 1280)}
+                  alt={item.id}
+                  key={item.id}
+                />
               ))}
             </div>
           </StyledDetail>

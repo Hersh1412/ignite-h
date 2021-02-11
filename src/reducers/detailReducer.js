@@ -13,6 +13,12 @@ const detailReducer = (state = initialState, action) => {
         screen: action.payload.screen,
         isLoading: false,
       };
+    case "REFRESH_DETAIL":
+      return {
+        game: { platforms: [] },
+        screen: { results: [] },
+        isLoading: true,
+      };
     case "LOADING_DETAILS":
       return {
         ...state,

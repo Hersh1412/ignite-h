@@ -5,6 +5,9 @@ export const loadDetail = (id) => async (dispatch) => {
   const detailData = await axios.get(getGameDetailsURL(id));
   const screenShotData = await axios.get(getGameScreenshotsURL(id));
 
+  // dispatch({
+  //   type: "REFRESH_DETAIL",
+  // });
   dispatch({
     type: "LOADING_DETAIL",
   });
@@ -15,5 +18,11 @@ export const loadDetail = (id) => async (dispatch) => {
       game: detailData.data,
       screen: screenShotData.data,
     },
+  });
+};
+
+export const unLoadDetail = () => async (dispatch) => {
+  dispatch({
+    type: "REFRESH_DETAIL",
   });
 };
